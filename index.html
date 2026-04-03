@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aiden — Твой AI-Сотрудник | Работает 24/7</title>
+    <meta name="description" content="Найми AI-сотрудника за $29. Работает 24/7, не устаёт, не просит зарплату. Настрой один раз — работает вечно.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a84ff;
+            --primary-dark: #0066cc;
+            --accent: #30d158;
+            --accent-orange: #ff9f0a;
+            --bg: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #181818;
+            --text: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --border: rgba(255,255,255,0.08);
+            --gradient: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 100%);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        /* Typewriter cursor */
+        .type-cursor {
+            display: inline-block;
+            width: 8px;
+            background: #0a84ff;
+            color: transparent;
+            margin-left: 2px;
+            border-radius: 1px;
+            animation: cursor-blink 0.7s step-end infinite;
+            vertical-align: text-bottom;
+            height: 1em;
+        }
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .terminal-line-el {
+            min-height: 1.8em;
+            word-break: break-all;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* CANVAS */
+        #particles-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.3px;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 980px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        /* SECTIONS */
+        section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
+            position: relative;
+            background:
+                linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.95)),
+                url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1920&q=80') center/cover no-repeat;
+        }
+
+        .hero-inner { max-width: 860px; position: relative; z-index: 2; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10, 132, 255, 0.15);
+            border: 1px solid rgba(10, 132, 255, 0.3);
+            color: #60b3ff;
+            padding: 8px 20px;
+            border-radius: 980px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(44px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+            color: #ffffff;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #0a84ff 0%, #5e5ce6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(17px, 2.2vw, 21px);
+            color: rgba(255,255,255,0.65);
+            max-width: 640px;
+            margin: 0 auto 44px;
+            line-height: 1.65;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 40px rgba(10,132,255,0.35);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 48px rgba(10,132,255,0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: rgba(255,255,255,0.8);
+            border: 1.5px solid rgba(255,255,255,0.25);
+            padding: 18px 40px;
+            border-radius: 980px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .social-proof {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .social-proof span.highlight { color: var(--accent); font-weight: 600; }
+
+        /* ── MARQUEE ── */
+        .marquee-section {
+            overflow: hidden;
+            background: rgba(10,132,255,0.05);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 0;
+            animation: marquee-scroll 40s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-track:hover { animation-play-state: paused; }
+
+        @keyframes marquee-scroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        .marquee-item {
+            white-space: nowrap;
+            padding: 0 48px;
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.02em;
+        }
+
+        .marquee-item strong {
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+        }
+
+        .marquee-item .mq-dot {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        /* SECTION HEADERS */
+        .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .section-label {
+            display: inline-block;
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            color: var(--text);
+        }
+
+        .section-sub {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-top: 16px;
+        }
+
+        /* PROBLEM */
+        .problem {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,60,60,0.03) 50%, transparent 100%);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px 32px;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(255,255,255,0.14);
+            transform: translateY(-4px);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .card-text {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SOLUTION */
+        .solution {
+            padding: 80px 0;
+        }
+
+        .solution .card { border-color: rgba(10,132,255,0.15); }
+        .solution .card:hover { border-color: rgba(10,132,255,0.3); }
+
+        /* HOW IT WORKS */
+        .how {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10,132,255,0.03) 50%, transparent 100%);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin-bottom: 56px;
+        }
+
+        .step {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 48px 32px 40px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .step:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-6px);
+            border-color: rgba(10,132,255,0.2);
+            box-shadow: 0 20px 60px rgba(10,132,255,0.1);
+        }
+
+        .step-num {
+            width: 88px;
+            height: 88px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: 900;
+            margin: 0 auto 28px;
+            box-shadow: 0 0 40px rgba(10,132,255,0.5), 0 0 80px rgba(10,132,255,0.15);
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .step-num::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(10,132,255,0.25);
+            animation: step-pulse 2.5s ease-in-out infinite;
+        }
+
+        @keyframes step-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.15; }
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* PRODUCT MOCKUP */
+        .mockup-frame {
+            max-width: 760px;
+            margin: 0 auto;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(135deg, #0a84ff, #5e5ce6, #30d158);
+            box-shadow: 0 0 60px rgba(10,132,255,0.25);
+        }
+
+        .mockup-inner {
+            border-radius: 18px;
+            overflow: hidden;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .mockup-inner img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.88;
+            filter: saturate(0.9) brightness(0.85);
+        }
+
+        .mockup-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .mockup-label {
+            position: absolute;
+            bottom: 20px;
+            left: 0; right: 0;
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* WHAT AI DOES */
+        .ai-does {
+            padding: 80px 0;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .ai-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            transition: all 0.3s;
+        }
+
+        .ai-card:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(48,209,88,0.2);
+            transform: translateY(-3px);
+        }
+
+        .ai-card-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(48,209,88,0.1);
+            border-radius: 12px;
+        }
+
+        .ai-card-content .ai-card-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .ai-card-content .ai-card-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* COMPARISON */
+        .comparison {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10,132,255,0.03) 50%, transparent 100%);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+        }
+
+        th, td {
+            padding: 20px 28px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 16px;
+        }
+
+        th {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-secondary);
+            background: rgba(255,255,255,0.03);
+        }
+
+        th:first-child { color: var(--text-secondary); }
+
+        th.col-ai {
+            background: rgba(10,132,255,0.1);
+            color: var(--primary);
+        }
+
+        td:last-child {
+            background: rgba(10,132,255,0.05);
+        }
+
+        tr:last-child td { border-bottom: none; }
+
+        td:first-child { color: var(--text-secondary); }
+
+        .check { color: var(--accent); font-size: 20px; }
+        .cross { color: #ff453a; font-size: 20px; }
+
+        .price-old { color: #ff453a; text-decoration: line-through; opacity: 0.7; }
+        .price-new { color: var(--accent); font-weight: 700; }
+
+        /* TESTIMONIALS */
+        .testimonials {
+            padding: 80px 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .testimonial {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 36px 32px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            font-size: 80px;
+            font-weight: 800;
+            color: rgba(10,132,255,0.12);
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(10,132,255,0.2);
+            transform: translateY(-4px);
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            color: #d1d1d6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .author-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 16px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .author-name {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .author-role {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .stars {
+            color: var(--accent-orange);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        /* PRICING */
+        .pricing {
+            padding: 80px 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(10,132,255,0.04) 50%, transparent 100%);
+        }
+
+        .pricing-card {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid rgba(10,132,255,0.3);
+            position: relative;
+            z-index: 2;
+            border-radius: 28px;
+            padding: 52px 48px;
+            text-align: center;
+            box-shadow: 0 0 80px rgba(10,132,255,0.15);
+        }
+
+        .pricing-tag {
+            display: inline-block;
+            background: rgba(10,132,255,0.15);
+            color: var(--primary);
+            border: 1px solid rgba(10,132,255,0.3);
+            padding: 6px 18px;
+            border-radius: 980px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .pricing-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .pricing-old {
+            font-size: 18px;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            margin-bottom: 4px;
+        }
+
+        .pricing-price {
+            font-size: 80px;
+            font-weight: 900;
+            letter-spacing: -4px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin: 8px 0 28px;
+        }
+
+        .pricing-price sup {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 0;
+            vertical-align: top;
+            margin-top: 16px;
+            display: inline-block;
+        }
+
+        .features-list {
+            list-style: none;
+            text-align: left;
+            margin: 0 0 36px;
+        }
+
+        .features-list li {
+            padding: 10px 0;
+            font-size: 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .features-list li:last-child { border-bottom: none; }
+
+        .features-list .feat-icon { font-size: 18px; }
+
+        .pricing-note {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+        }
+
+        /* SETUP */
+        .setup {
+            padding: 80px 0;
+        }
+
+        .setup-card {
+            max-width: 720px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(10,132,255,0.08) 0%, rgba(94,92,230,0.08) 100%);
+            border: 1px solid rgba(10,132,255,0.2);
+            border-radius: 24px;
+            padding: 48px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .setup-content { flex: 1; min-width: 240px; }
+
+        .setup-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+        }
+
+        .setup-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 18px;
+        }
+
+        .setup-features {
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .setup-features span {
+            background: rgba(255,255,255,0.05);
+            padding: 4px 12px;
+            border-radius: 980px;
+            border: 1px solid var(--border);
+        }
+
+        .setup-pricing { text-align: center; flex-shrink: 0; }
+
+        .setup-old {
+            font-size: 18px;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+        }
+
+        .setup-new {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            color: var(--primary);
+            line-height: 1.1;
+        }
+
+        .setup-new sup { font-size: 24px; vertical-align: top; margin-top: 8px; }
+
+        .btn-outline {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 14px 32px;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            border-radius: 980px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 24px;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        footer .footer-brand {
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        footer .powered {
+            margin-top: 8px;
+            font-size: 13px;
+            color: rgba(255,255,255,0.3);
+        }
+
+        footer .powered a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* FUTURISTIC BACKGROUND MESH */
+        .fx-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fx-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 800px 600px at 10% 30%, rgba(10,132,255,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 700px 500px at 90% 70%, rgba(94,92,230,0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 400px 400px at 50% 50%, rgba(48,209,88,0.04) 0%, transparent 70%);
+            animation: mesh-shift 10s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes mesh-shift {
+            0%   { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Floating AI robot SVG */
+        .ai-robot-bg {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 320px;
+            height: 320px;
+            opacity: 0.04;
+            z-index: 0;
+            pointer-events: none;
+            animation: robot-float 6s ease-in-out infinite;
+        }
+        @keyframes robot-float {
+            0%, 100% { transform: translateY(-50%) rotate(-3deg); }
+            50% { transform: translateY(calc(-50% - 20px)) rotate(3deg); }
+        }
+
+        /* Neural grid lines */
+        .fx-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(10,132,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10,132,255,0.035) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: grid-scroll 20s linear infinite;
+            pointer-events: none;
+            mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 20%, rgba(0,0,0,0.6) 80%, transparent 100%);
+        }
+
+        @keyframes grid-scroll {
+            from { background-position: 0 0, 0 0; }
+            to   { background-position: 60px 60px, 60px 60px; }
+        }
+
+        .fx-bg .container { position: relative; z-index: 1; }
+
+        /* Circuit node dots at intersections */
+        .circuit-dots {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .circuit-dots span {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(10,132,255,0.5);
+            animation: dot-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes dot-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.4; }
+            50%       { transform: scale(2); opacity: 1; }
+        }
+
+        /* FOOTER orbs */
+        footer {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none;
+            animation: orb-pulse 4s ease-in-out infinite alternate;
+        }
+
+        .footer-orb-1 {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(10,132,255,0.18) 0%, transparent 70%);
+            left: -80px; bottom: -80px;
+            animation-delay: 0s;
+        }
+
+        .footer-orb-2 {
+            width: 240px; height: 240px;
+            background: radial-gradient(circle, rgba(94,92,230,0.15) 0%, transparent 70%);
+            right: -60px; bottom: -40px;
+            animation-delay: 1.5s;
+        }
+
+        .footer-orb-3 {
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, rgba(48,209,88,0.1) 0%, transparent 70%);
+            left: 50%; transform: translateX(-50%);
+            bottom: 0;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes orb-pulse {
+            0%   { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.25); opacity: 1; }
+        }
+
+        .footer-orb-3 { animation: orb-pulse-center 5s ease-in-out infinite alternate; }
+        @keyframes orb-pulse-center {
+            0%   { transform: translateX(-50%) scale(1); opacity: 0.5; }
+            100% { transform: translateX(-50%) scale(1.4); opacity: 0.9; }
+        }
+
+        footer .footer-inner { position: relative; z-index: 1; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 14px 20px; }
+            .setup-card { padding: 32px 24px; flex-direction: column; }
+            .setup-pricing { width: 100%; }
+            .pricing-card { padding: 36px 28px; }
+            th, td { padding: 14px 16px; font-size: 14px; }
+            .hero h1 { letter-spacing: -1px; }
+            .step-num { width: 72px; height: 72px; font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+    <div style="display:flex;align-items:center;gap:8px;">
+        <div class="nav-logo">Aiden</div>
+        <img src="data:image/webp;base64,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" style="height:44px;opacity:0.9;margin-left:10px;" alt="OpenClaw">
+        <span style="font-size:11px;color:rgba(255,255,255,0.3);margin-left:2px;">Powered by OpenClaw</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+        <div id="lang-switcher" style="display:flex;gap:4px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:4px;">
+            <button onclick="setLang('en')" id="lang-en" style="padding:4px 10px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;background:#0a84ff;color:#fff;transition:all 0.2s;">EN</button>
+            <button onclick="setLang('es')" id="lang-es" style="padding:4px 10px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;background:transparent;color:#888;transition:all 0.2s;">ES</button>
+            <button onclick="setLang('ru')" id="lang-ru" style="padding:4px 10px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;background:transparent;color:#888;transition:all 0.2s;">RU</button>
+        </div>
+        <a href="blog/" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;font-weight:500;margin-right:4px;transition:color 0.2s;" onmouseover="this.style.color='#0a84ff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Blog</a>
+        <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" class="nav-cta" id="nav-cta-btn">Get for $29</a>
+    </div>
+</nav>
+<script>
+const translations = {
+    en: {
+        navCta: "Get for $29",
+        heroBadge: "🤖 AI that works while you rest",
+        heroH1: "Hire an AI Employee.<br>Works 24/7. Never tires.<br>Never asks for a raise.",
+        heroSub: "While you sleep, drive, or relax — your AI replies to clients, handles tasks, and delivers results. Set up once. Works forever.",
+        heroBtn1: "Get the Guide — $29",
+        heroBtn2: "See how it works",
+        heroProof: "⚡ 500+ entrepreneurs have hired their AI employee",
+        problemLabel: "PROBLEM",
+        problemTitle: "You do everything yourself.<br>But you don't have to.",
+        solutionLabel: "SOLUTION",
+        solutionTitle: "What if you had an employee for $29?",
+        solutionSub: "No subscription. Not $1000/month. Once — forever.",
+        howLabel: "HOW IT WORKS",
+        howTitle: "How it works",
+        featuresLabel: "FEATURES",
+        featuresTitle: "What your AI employee does for you",
+        comparisonLabel: "COMPARISON",
+        comparisonTitle: "AI Employee vs Regular Employee",
+        cmpColHuman: "Regular Employee",
+        cmpColAi: "AI Employee (Aiden)",
+        cmpRowCost: "Cost",
+        cmpPriceOld: "$1000+/mo",
+        cmpPriceNew: "$29 one-time",
+        cmpRowNight: "Works at night",
+        cmpRowSick: "Never gets sick",
+        cmpRowMemory: "Remembers everything",
+        cmpRowTg: "Works in Telegram",
+        cmpRowScale: "Scales infinitely",
+        testimonialsLabel: "WHAT PEOPLE SAY",
+        testimonialsTitle: "Real reviews. Real results.",
+        pricingLabel: "PRICING",
+        pricingTag: "🔥 Limited price",
+        pricingTitle: "Pay once — works forever",
+        pricingCardTitle: "Your AI Employee",
+        pricingOldPrice: "Regular price: $97",
+        feat1: "12 chapters — from setup to automation",
+        feat2: "AI works 24/7 on your tasks",
+        feat3: "Templates and ready-made settings",
+        feat4: "30 ready AI commands",
+        feat5: "Guide in 3 languages (RU / EN / ES)",
+        feat6: "Community support",
+        // Problem section
+        prob1Title: "Working 12-hour days",
+        prob1Text: "Tasks never end. Your to-do list grows faster than you can work. You're trapped in your own business.",
+        prob2Title: "Employees cost too much",
+        prob2Text: "Hiring a decent assistant starts at $1000/month. Plus taxes, sick days, and management. It doesn't scale.",
+        prob3Title: "Routine eats your time",
+        prob3Text: "Replying to messages, writing reports, reminding clients... All of this can be automated. But you keep doing it.",
+        // Solution section
+        sol1Title: "Works 24/7 without days off",
+        sol1Text: "Replies, plans, reminds — around the clock. While you sleep, your AI is working.",
+        sol2Title: "$29 once, not $1000/month",
+        sol2Text: "One payment — permanent employee. No subscriptions, salaries or management.",
+        sol3Title: "Ready to work in 1 hour",
+        sol3Text: "Step-by-step guide from scratch. No technical knowledge needed — just follow the instructions.",
+        // AI does section
+        aiCard1Title: "Replies to messages and emails",
+        aiCard1Text: "Handles incoming emails and client messages around the clock",
+        aiCard2Title: "Plans and reminds about tasks",
+        aiCard2Text: "Manages schedule, reminds about deadlines and important tasks",
+        aiCard3Title: "Analyzes data and makes reports",
+        aiCard3Text: "Collects data, builds analytics, prepares summaries and reports",
+        aiCard4Title: "Writes texts, posts, descriptions",
+        aiCard4Text: "Content for social media, product descriptions, client letters",
+        aiCard5Title: "Monitors and alerts about important things",
+        aiCard5Text: "Tracks metrics and alerts you when your attention is needed",
+        aiCard6Title: "Works in Telegram and WhatsApp",
+        aiCard6Text: "Works directly in the messengers where your clients are",
+        pricingNote: "🔒 Secure payment · Instant access",
+        footerCopy: "© 2025 All rights reserved",
+        pricingCta: "Hire your AI employee — $29",
+        setupTitle: "Don't want to set it up yourself?",
+        setupText: "We'll install and configure your AI employee from scratch. Usually costs $400, but for guide buyers — special price $200.",
+        setupFeatures: ["⚙️ Installation", "🎯 Setup for your business", "🛡️ 30 days support"],
+        setupCta: "Order setup →",
+        problemCard1Title: "Working 12 hours a day",
+        problemCard1Text: "Tasks never end. Your to-do list grows faster than you can work. You're trapped in your own business.",
+        problemCard2Title: "Hiring staff is expensive",
+        problemCard2Text: "A normal assistant costs $1000+/month. Plus taxes, sick days, management. It doesn't scale.",
+        problemCard3Title: "Routine eats your time",
+        problemCard3Text: "Replying to messages, making reports, reminding clients... All this can be automated. But you keep doing it manually.",
+        solutionCard1Title: "Works 24/7 without days off",
+        solutionCard1Text: "Replies, plans, reminds — around the clock. While you sleep, your AI is working.",
+        solutionCard2Title: "Costs $29 once, not $1000/month",
+        solutionCard2Text: "One payment — permanent employee. No subscriptions, no salaries, no management.",
+        solutionCard3Title: "Ready to work in 1 hour",
+        solutionCard3Text: "Step-by-step guide from zero. No technical skills required — just follow the instructions.",
+        step1Title: "Read the guide (1-2 hours)",
+        step1Text: "12 chapters, from installation to full automation",
+        step2Title: "Install OpenClaw",
+        step2Text: "On your computer or server — detailed instructions for Mac, Windows, and VPS",
+        step3Title: "Set up your AI employee",
+        step3Text: "Using ready-made templates — name, personality, tasks, memory",
+        step4Title: "That's it. It works. You — don't have to (if you don't want to)",
+        step4Text: "Your AI employee handles tasks 24/7",
+    },
+    es: {
+        navCta: "Obtener por $29",
+        heroBadge: "🤖 IA que trabaja mientras descansas",
+        heroH1: "Contrata un Empleado de IA.<br>Trabaja 24/7. No se cansa.<br>No pide salario.",
+        heroSub: "Mientras duermes, conduces o descansas — tu IA responde clientes, ejecuta tareas y entrega resultados. Configura una vez. Funciona para siempre.",
+        heroBtn1: "Obtener la Guía — $29",
+        heroBtn2: "Ver cómo funciona",
+        heroProof: "⚡ 500+ emprendedores ya tienen su empleado de IA",
+        problemLabel: "PROBLEMA",
+        problemTitle: "Lo haces todo tú solo.<br>Pero no tienes por qué.",
+        solutionLabel: "SOLUCIÓN",
+        solutionTitle: "¿Y si tuvieras un empleado por $29?",
+        solutionSub: "Sin suscripción. Sin $1000/mes. Una vez — para siempre.",
+        howLabel: "CÓMO FUNCIONA",
+        howTitle: "Cómo funciona",
+        featuresLabel: "FUNCIONES",
+        featuresTitle: "Qué hace tu empleado de IA por ti",
+        comparisonLabel: "COMPARACIÓN",
+        comparisonTitle: "Empleado IA vs Empleado Regular",
+        cmpColHuman: "Empleado Regular",
+        cmpColAi: "Empleado IA (Aiden)",
+        cmpRowCost: "Costo",
+        cmpPriceOld: "$1000+/mes",
+        cmpPriceNew: "$29 único",
+        cmpRowNight: "Trabaja de noche",
+        cmpRowSick: "Nunca se enferma",
+        cmpRowMemory: "Recuerda todo",
+        cmpRowTg: "Trabaja en Telegram",
+        cmpRowScale: "Escala sin límites",
+        testimonialsLabel: "LO QUE DICEN",
+        testimonialsTitle: "Opiniones reales. Resultados reales.",
+        pricingLabel: "PRECIO",
+        pricingTag: "🔥 Precio limitado",
+        pricingTitle: "Paga una vez — funciona para siempre",
+        pricingCardTitle: "Tu Empleado IA",
+        pricingOldPrice: "Precio regular: $97",
+        feat1: "12 capítulos — de instalación a automatización",
+        feat2: "IA trabaja 24/7 en tus tareas",
+        feat3: "Plantillas y configuraciones listas",
+        feat4: "30 comandos de IA listos",
+        feat5: "Guía en 3 idiomas (RU / EN / ES)",
+        feat6: "Soporte comunitario",
+        // Problem section
+        prob1Title: "Trabajando 12 horas al día",
+        prob1Text: "Las tareas nunca terminan. Tu lista de pendientes crece más rápido de lo que puedes trabajar. Estás atrapado en tu propio negocio.",
+        prob2Title: "Los empleados cuestan demasiado",
+        prob2Text: "Contratar un buen asistente empieza en $1000/mes. Más impuestos, bajas y gestión. No escala.",
+        prob3Title: "La rutina devora tu tiempo",
+        prob3Text: "Responder mensajes, hacer informes, recordar a clientes... Todo esto puede automatizarse. Pero sigues haciéndolo.",
+        // Solution section
+        sol1Title: "Trabaja 24/7 sin descanso",
+        sol1Text: "Responde, planifica, recuerda — las 24 horas. Mientras duermes, tu IA trabaja.",
+        sol2Title: "$29 una vez, no $1000/mes",
+        sol2Text: "Un pago — empleado permanente. Sin suscripciones, salarios ni gestión.",
+        sol3Title: "Listo para trabajar en 1 hora",
+        sol3Text: "Guía paso a paso desde cero. No se necesitan conocimientos técnicos — solo sigue las instrucciones.",
+        // AI does section
+        aiCard1Title: "Responde mensajes y correos",
+        aiCard1Text: "Gestiona correos entrantes y mensajes de clientes las 24 horas",
+        aiCard2Title: "Planifica y recuerda tareas",
+        aiCard2Text: "Gestiona el horario, recuerda fechas límite y tareas importantes",
+        aiCard3Title: "Analiza datos y hace informes",
+        aiCard3Text: "Recopila datos, construye análisis, prepara resúmenes e informes",
+        aiCard4Title: "Escribe textos, posts, descripciones",
+        aiCard4Text: "Contenido para redes sociales, descripciones de productos, cartas a clientes",
+        aiCard5Title: "Monitoriza y alerta sobre cosas importantes",
+        aiCard5Text: "Rastrea métricas y te avisa cuando se necesita tu atención",
+        aiCard6Title: "Trabaja en Telegram y WhatsApp",
+        aiCard6Text: "Trabaja directamente en los mensajeros donde están tus clientes",
+        pricingNote: "🔒 Pago seguro · Acceso instantáneo",
+        footerCopy: "© 2025 Todos los derechos reservados",
+        pricingCta: "Contratar tu empleado IA — $29",
+        setupTitle: "¿No quieres configurarlo tú mismo?",
+        setupText: "Instalamos y configuramos tu empleado IA desde cero. Normalmente cuesta $400, pero para compradores de la guía — precio especial $200.",
+        setupFeatures: ["⚙️ Instalación", "🎯 Configuración para tu negocio", "🛡️ 30 días de soporte"],
+        setupCta: "Pedir configuración →",
+        problemCard1Title: "Trabajando 12 horas al día",
+        problemCard1Text: "Las tareas nunca terminan. Tu lista crece más rápido de lo que puedes trabajar. Estás atrapado en tu propio negocio.",
+        problemCard2Title: "Contratar personal es caro",
+        problemCard2Text: "Un asistente normal cuesta $1000+/mes. Más impuestos, bajas por enfermedad, gestión. No escala.",
+        problemCard3Title: "La rutina consume tu tiempo",
+        problemCard3Text: "Responder mensajes, hacer informes, recordar clientes... Todo esto se puede automatizar. Pero sigues haciéndolo tú.",
+        solutionCard1Title: "Trabaja 24/7 sin días libres",
+        solutionCard1Text: "Responde, planifica, recuerda — las 24 horas. Mientras duermes, tu IA trabaja.",
+        solutionCard2Title: "Cuesta $29 una vez, no $1000/mes",
+        solutionCard2Text: "Un pago — empleado permanente. Sin suscripciones, sin salarios, sin gestión.",
+        solutionCard3Title: "Listo para trabajar en 1 hora",
+        solutionCard3Text: "Guía paso a paso desde cero. No se requieren conocimientos técnicos — solo sigue las instrucciones.",
+        step1Title: "Lee la guía (1-2 horas)",
+        step1Text: "12 capítulos, de la instalación a la automatización completa",
+        step2Title: "Instala OpenClaw",
+        step2Text: "En tu ordenador o servidor — instrucciones detalladas para Mac, Windows y VPS",
+        step3Title: "Configura tu empleado IA",
+        step3Text: "Usando plantillas listas — nombre, personalidad, tareas, memoria",
+        step4Title: "Eso es todo. Funciona. Tú — no tienes que hacerlo (si no quieres)",
+        step4Text: "Tu empleado IA maneja tareas 24/7",
+    },
+    ru: {
+        navCta: "Получить за $29",
+        heroBadge: "🤖 AI который работает пока ты отдыхаешь",
+        heroH1: "Найми AI-сотрудника.<br>Работает 24/7. Не устаёт.<br>Не просит зарплату.",
+        heroSub: "Пока ты спишь, едешь или отдыхаешь — твой AI отвечает клиентам, выполняет задачи и генерирует результаты. Настрой один раз. Работает вечно.",
+        heroBtn1: "Получить гайд — $29",
+        heroBtn2: "Посмотреть как это работает",
+        heroProof: "⚡ Уже 500+ предпринимателей наняли своего AI-сотрудника",
+        problemLabel: "ПРОБЛЕМА",
+        problemTitle: "Ты делаешь всё сам.<br>А мог бы не делать.",
+        solutionLabel: "РЕШЕНИЕ",
+        solutionTitle: "Что если бы у тебя был сотрудник за $29?",
+        solutionSub: "Не подписка. Не $1000/мес. Один раз — навсегда.",
+        howLabel: "КАК ЭТО РАБОТАЕТ",
+        howTitle: "Как это работает",
+        featuresLabel: "ВОЗМОЖНОСТИ",
+        featuresTitle: "Что твой AI-сотрудник<br>делает за тебя",
+        comparisonLabel: "СРАВНЕНИЕ",
+        comparisonTitle: "AI-сотрудник vs Обычный сотрудник",
+        cmpColHuman: "Обычный сотрудник",
+        cmpColAi: "AI-сотрудник (Aiden)",
+        cmpRowCost: "Стоимость",
+        cmpPriceOld: "$1000+/мес",
+        cmpPriceNew: "$29 один раз",
+        cmpRowNight: "Работает ночью",
+        cmpRowSick: "Никогда не болеет",
+        cmpRowMemory: "Помнит всё",
+        cmpRowTg: "Работает в Telegram",
+        cmpRowScale: "Масштабируется",
+        testimonialsLabel: "ЧТО ГОВОРЯТ ЛЮДИ",
+        testimonialsTitle: "Реальные отзывы.<br>Реальные результаты.",
+        pricingLabel: "ЦЕНА",
+        pricingTag: "🔥 Лимитированная цена",
+        pricingTitle: "Один раз заплатил —<br>работает вечно",
+        pricingCardTitle: "Твой AI-Сотрудник",
+        pricingOldPrice: "Обычная цена: $97",
+        feat1: "12 глав — от установки до автоматизации",
+        feat2: "AI работает 24/7 на твоих задачах",
+        feat3: "Шаблоны и готовые настройки",
+        feat4: "30 готовых команд для AI",
+        feat5: "Гайд на 3 языках (RU / EN / ES)",
+        feat6: "Поддержка сообщества",
+        // Problem section
+        prob1Title: "Работаешь по 12 часов",
+        prob1Text: "Задачи не кончаются. Список дел растёт быстрее, чем ты успеваешь работать. Ты в ловушке собственного бизнеса.",
+        prob2Title: "Сотрудник стоит дорого",
+        prob2Text: "Нанять нормального помощника — от $1000 в месяц. И ещё налоги, больничные, управление. Это не масштабируется.",
+        prob3Title: "Рутина съедает время",
+        prob3Text: "Ответить на сообщения, составить отчёт, напомнить клиенту... Всё это можно не делать руками. Но ты продолжаешь.",
+        // Solution section
+        sol1Title: "Работает 24/7 без выходных",
+        sol1Text: "Отвечает, планирует, напоминает — круглосуточно. Пока ты спишь, твой AI работает.",
+        sol2Title: "Стоит $29 один раз, не $1000/мес",
+        sol2Text: "Одна оплата — постоянный сотрудник. Без подписок, зарплат и управления.",
+        sol3Title: "Готов к работе за 1 час",
+        sol3Text: "Пошаговый гайд от нуля. Технические знания не нужны — просто следуй инструкции.",
+        // AI does section
+        aiCard1Title: "Отвечает на сообщения и письма",
+        aiCard1Text: "Обрабатывает входящие письма и сообщения от клиентов круглосуточно",
+        aiCard2Title: "Планирует и напоминает о задачах",
+        aiCard2Text: "Ведёт расписание, напоминает о дедлайнах и важных задачах",
+        aiCard3Title: "Анализирует данные и делает отчёты",
+        aiCard3Text: "Собирает данные, строит аналитику, готовит сводки и отчёты",
+        aiCard4Title: "Пишет тексты, посты, описания",
+        aiCard4Text: "Контент для соцсетей, описания товаров, письма клиентам",
+        aiCard5Title: "Мониторит и предупреждает о важном",
+        aiCard5Text: "Следит за метриками и предупреждает, когда нужна твоя реакция",
+        aiCard6Title: "Работает в Telegram и WhatsApp",
+        aiCard6Text: "Работает прямо в мессенджерах где твои клиенты",
+        pricingNote: "🔒 Безопасная оплата · Мгновенный доступ",
+        footerCopy: "© 2025 Все права защищены",
+        pricingCta: "Нанять своего AI-сотрудника — $29",
+        setupTitle: "Не хочешь настраивать сам?",
+        setupText: "Мы установим и настроим твоего AI-сотрудника под ключ. Обычно это стоит $400, но для покупателей гайда — специальная цена $200.",
+        setupFeatures: ["⚙️ Установка", "🎯 Настройка под твой бизнес", "🛡️ 30 дней поддержки"],
+        setupCta: "Заказать настройку →",
+        problemCard1Title: "Работаешь по 12 часов",
+        problemCard1Text: "Задачи не кончаются. Список дел растёт быстрее, чем ты успеваешь работать. Ты в ловушке собственного бизнеса.",
+        problemCard2Title: "Сотрудник стоит дорого",
+        problemCard2Text: "Нанять нормального помощника — от $1000 в месяц. И ещё налоги, больничные, управление. Это не масштабируется.",
+        problemCard3Title: "Рутина съедает время",
+        problemCard3Text: "Ответить на сообщения, составить отчёт, напомнить клиенту... Всё это можно не делать руками. Но ты продолжаешь.",
+        solutionCard1Title: "Работает 24/7 без выходных",
+        solutionCard1Text: "Отвечает, планирует, напоминает — круглосуточно. Пока ты спишь, твой AI работает.",
+        solutionCard2Title: "Стоит $29 один раз, не $1000/мес",
+        solutionCard2Text: "Одна оплата — постоянный сотрудник. Без подписок, зарплат и управления.",
+        solutionCard3Title: "Готов к работе за 1 час",
+        solutionCard3Text: "Пошаговый гайд от нуля. Технические знания не нужны — просто следуй инструкции.",
+        step1Title: "Читаешь гайд (1-2 часа)",
+        step1Text: "12 глав, от установки до полной автоматизации",
+        step2Title: "Устанавливаешь OpenClaw",
+        step2Text: "На компьютер или сервер — подробные инструкции для Mac, Windows и VPS",
+        step3Title: "Настраиваешь своего AI-сотрудника",
+        step3Text: "По готовым шаблонам — имя, личность, задачи, память",
+        step4Title: "Всё. Он работает. Ты — нет (если не хочешь)",
+        step4Text: "Твой AI-сотрудник выполняет задачи 24/7",
+    }
+};
+
+function setEl(id, html) {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+}
+function setText(id, text) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+}
+
+function setLang(lang) {
+    const t = translations[lang];
+    // Nav
+    setText('nav-cta-btn', t.navCta);
+    // Hero
+    const badge = document.querySelector('.badge');
+    if (badge) badge.textContent = t.heroBadge;
+    const h1 = document.querySelector('.hero h1');
+    if (h1) h1.innerHTML = t.heroH1;
+    const sub = document.querySelector('.hero-subtitle');
+    if (sub) sub.textContent = t.heroSub;
+    setText('hero-btn1', t.heroBtn1);
+    setText('hero-btn2', t.heroBtn2);
+    const proof = document.querySelector('.social-proof');
+    if (proof) {
+        proof.innerHTML = t.heroProof.replace('500+', '<span class="highlight">500+</span>');
+    }
+    // Sections
+    setEl('problem-label', t.problemLabel);
+    setEl('problem-title', t.problemTitle);
+    setEl('solution-label', t.solutionLabel);
+    setEl('solution-title', t.solutionTitle);
+    setText('solution-sub', t.solutionSub);
+    setEl('how-label', t.howLabel);
+    setEl('how-title', t.howTitle);
+    setEl('features-label', t.featuresLabel);
+    setEl('features-title', t.featuresTitle);
+    setEl('comparison-label', t.comparisonLabel);
+    setEl('comparison-title', t.comparisonTitle);
+    setEl('cmp-col-human', t.cmpColHuman);
+    setEl('cmp-col-ai', t.cmpColAi);
+    setEl('cmp-row-cost', t.cmpRowCost);
+    setEl('cmp-price-old', t.cmpPriceOld);
+    setEl('cmp-price-new', t.cmpPriceNew);
+    setEl('cmp-row-night', t.cmpRowNight);
+    setEl('cmp-row-sick', t.cmpRowSick);
+    setEl('cmp-row-memory', t.cmpRowMemory);
+    setEl('cmp-row-tg', t.cmpRowTg);
+    setEl('cmp-row-scale', t.cmpRowScale);
+    setEl('testimonials-label', t.testimonialsLabel);
+    setEl('testimonials-title', t.testimonialsTitle);
+    setEl('pricing-label', t.pricingLabel);
+    setEl('pricing-tag', t.pricingTag);
+    setEl('pricing-title', t.pricingTitle);
+    setEl('pricing-card-title', t.pricingCardTitle);
+    setEl('pricing-old-price', t.pricingOldPrice);
+    setEl('pricing-note', t.pricingNote);
+    setEl('footer-copy', t.footerCopy);
+    // Pricing features
+    for (let i = 1; i <= 6; i++) setText('feat-'+i, t['feat'+i]);
+    setText('pricing-cta', t.pricingCta);
+    // Setup
+    setText('setup-title', t.setupTitle);
+    setText('setup-text', t.setupText);
+    const sf = document.getElementById('setup-features');
+    if (sf) sf.innerHTML = t.setupFeatures.map(f => `<span>${f}</span>`).join('');
+    setText('setup-cta', t.setupCta);
+    // Problem cards
+    setText('problem-card1-title', t.problemCard1Title);
+    setText('problem-card1-text', t.problemCard1Text);
+    setText('problem-card2-title', t.problemCard2Title);
+    setText('problem-card2-text', t.problemCard2Text);
+    setText('problem-card3-title', t.problemCard3Title);
+    setText('problem-card3-text', t.problemCard3Text);
+    // Solution cards
+    setText('solution-card1-title', t.solutionCard1Title);
+    setText('solution-card1-text', t.solutionCard1Text);
+    setText('solution-card2-title', t.solutionCard2Title);
+    setText('solution-card2-text', t.solutionCard2Text);
+    setText('solution-card3-title', t.solutionCard3Title);
+    setText('solution-card3-text', t.solutionCard3Text);
+    // How it works steps
+    setText('step1-title', t.step1Title);
+    setText('step1-text', t.step1Text);
+    setText('step2-title', t.step2Title);
+    setText('step2-text', t.step2Text);
+    setText('step3-title', t.step3Title);
+    setText('step3-text', t.step3Text);
+    setText('step4-title', t.step4Title);
+    setText('step4-text', t.step4Text);
+    // AI feature card titles
+    setText('ai-card1-title', t.aiCard1Title);
+    setText('ai-card1-text', t.aiCard1Text);
+    setText('ai-card2-title', t.aiCard2Title);
+    setText('ai-card2-text', t.aiCard2Text);
+    setText('ai-card3-title', t.aiCard3Title);
+    setText('ai-card3-text', t.aiCard3Text);
+    setText('ai-card4-title', t.aiCard4Title);
+    setText('ai-card4-text', t.aiCard4Text);
+    setText('ai-card5-title', t.aiCard5Title);
+    setText('ai-card5-text', t.aiCard5Text);
+    setText('ai-card6-title', t.aiCard6Title);
+    setText('ai-card6-text', t.aiCard6Text);
+    // Lang buttons
+    ['en','es','ru'].forEach(l => {
+        const btn = document.getElementById('lang-'+l);
+        if (btn) {
+            btn.style.background = l === lang ? '#0a84ff' : 'transparent';
+            btn.style.color = l === lang ? '#fff' : '#888';
+        }
+    });
+}
+window.addEventListener('load', () => setLang('en'));
+</script>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="badge">🤖 AI который работает пока ты отдыхаешь</div>
+        <h1>Найми AI-сотрудника.<br><span>Работает 24/7.</span><br>Не просит зарплату.</h1>
+        <p class="hero-subtitle">
+            Пока ты спишь, едешь или отдыхаешь — твой AI отвечает клиентам, выполняет задачи и генерирует результаты. Настрой один раз. Работает вечно.
+        </p>
+        <div class="hero-buttons">
+            <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" class="btn-primary" id="hero-btn1">Получить гайд — $29</a>
+            <a href="#how" class="btn-secondary" id="hero-btn2">Посмотреть как это работает</a>
+        </div>
+        <p class="social-proof">⚡ Уже <span class="highlight">500+ предпринимателей</span> наняли своего AI-сотрудника</p>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+    <div class="marquee-track">
+        <span class="marquee-item"><span class="mq-dot">●</span><strong>@nateliason:</strong> "1,000% worth it... autonomously running tests, resolving errors and opening PRs"</span>
+        <span class="marquee-item"><span class="mq-dot">●</span><strong>@davemorin:</strong> "the first time I have felt like I am living in the future since the launch of ChatGPT"</span>
+        <span class="marquee-item"><span class="mq-dot">●</span><strong>@therno:</strong> "It's running my company."</span>
+        <span class="marquee-item"><span class="mq-dot">●</span>AI работает 24/7 — ты отдыхаешь</span>
+        <span class="marquee-item"><span class="mq-dot">●</span>$29 один раз — вместо $1000/мес</span>
+        <span class="marquee-item"><span class="mq-dot">●</span>Настройка за 1 час. Без кода.</span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-item"><span class="mq-dot">●</span><strong>@nateliason:</strong> "1,000% worth it... autonomously running tests, resolving errors and opening PRs"</span>
+        <span class="marquee-item"><span class="mq-dot">●</span><strong>@davemorin:</strong> "the first time I have felt like I am living in the future since the launch of ChatGPT"</span>
+        <span class="marquee-item"><span class="mq-dot">●</span><strong>@therno:</strong> "It's running my company."</span>
+        <span class="marquee-item"><span class="mq-dot">●</span>AI работает 24/7 — ты отдыхаешь</span>
+        <span class="marquee-item"><span class="mq-dot">●</span>$29 один раз — вместо $1000/мес</span>
+        <span class="marquee-item"><span class="mq-dot">●</span>Настройка за 1 час. Без кода.</span>
+    </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem fx-bg">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="problem-label">ПРОБЛЕМА</span>
+            <h2 class="section-title" id="problem-title">Ты делаешь всё сам.<br>А мог бы не делать.</h2>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon">😴</span>
+                <h3 class="card-title" id="problem-card1-title">Работаешь по 12 часов</h3>
+                <p class="card-text" id="problem-card1-text">Задачи не кончаются. Список дел растёт быстрее, чем ты успеваешь работать. Ты в ловушке собственного бизнеса.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">💸</span>
+                <h3 class="card-title" id="problem-card2-title">Сотрудник стоит дорого</h3>
+                <p class="card-text" id="problem-card2-text">Нанять нормального помощника — от $1000 в месяц. И ещё налоги, больничные, управление. Это не масштабируется.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">🔄</span>
+                <h3 class="card-title" id="problem-card3-title">Рутина съедает время</h3>
+                <p class="card-text" id="problem-card3-text">Ответить на сообщения, составить отчёт, напомнить клиенту... Всё это можно не делать руками. Но ты продолжаешь.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution fx-bg">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="solution-label">РЕШЕНИЕ</span>
+            <h2 class="section-title" id="solution-title">Что если бы у тебя был<br>сотрудник за $29?</h2>
+            <p class="section-sub" id="solution-sub">Не подписка. Не $1000/мес. Один раз — навсегда.</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon">🤖</span>
+                <h3 class="card-title" id="solution-card1-title">Работает 24/7 без выходных</h3>
+                <p class="card-text" id="solution-card1-text">Отвечает, планирует, напоминает — круглосуточно. Пока ты спишь, твой AI работает.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">💰</span>
+                <h3 class="card-title" id="solution-card2-title">Стоит $29 один раз, не $1000/мес</h3>
+                <p class="card-text" id="solution-card2-text">Одна оплата — постоянный сотрудник. Без подписок, зарплат и управления.</p>
+            </div>
+            <div class="card">
+                <span class="card-icon">⚡</span>
+                <h3 class="card-title" id="solution-card3-title">Готов к работе за 1 час</h3>
+                <p class="card-text" id="solution-card3-text">Пошаговый гайд от нуля. Технические знания не нужны — просто следуй инструкции.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how fx-bg" id="how">
+    <!-- Floating AI Robot SVG background -->
+    <svg class="ai-robot-bg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="60" y="70" width="80" height="80" rx="12" fill="white"/>
+        <rect x="75" y="85" width="20" height="15" rx="4" fill="black"/>
+        <rect x="105" y="85" width="20" height="15" rx="4" fill="black"/>
+        <ellipse cx="85" cy="92" rx="6" ry="6" fill="#0a84ff"/>
+        <ellipse cx="115" cy="92" rx="6" ry="6" fill="#0a84ff"/>
+        <rect x="80" y="120" width="40" height="8" rx="4" fill="black" opacity="0.5"/>
+        <rect x="85" y="55" width="30" height="20" rx="6" fill="white"/>
+        <rect x="97" y="45" width="6" height="15" rx="3" fill="white"/>
+        <rect x="40" y="90" width="20" height="35" rx="8" fill="white"/>
+        <rect x="140" y="90" width="20" height="35" rx="8" fill="white"/>
+        <rect x="70" y="150" width="20" height="30" rx="8" fill="white"/>
+        <rect x="110" y="150" width="20" height="30" rx="8" fill="white"/>
+        <circle cx="100" cy="30" r="8" fill="white" opacity="0.5"/>
+        <line x1="100" y1="38" x2="100" y2="55" stroke="white" stroke-width="3"/>
+    </svg>
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="how-label">КАК ЭТО РАБОТАЕТ</span>
+            <h2 class="section-title" id="how-title">Как это работает</h2>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3 class="step-title" id="step1-title">Читаешь гайд (1-2 часа)</h3>
+                <p class="step-text" id="step1-text">12 глав, от установки до полной автоматизации</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3 class="step-title" id="step2-title">Устанавливаешь OpenClaw</h3>
+                <p class="step-text" id="step2-text">На компьютер или сервер — подробные инструкции для Mac, Windows и VPS</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3 class="step-title" id="step3-title">Настраиваешь своего AI-сотрудника</h3>
+                <p class="step-text" id="step3-text">По готовым шаблонам — имя, личность, задачи, память</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h3 class="step-title" id="step4-title">Всё. Он работает. Ты — нет (если не хочешь)</h3>
+                <p class="step-text" id="step4-text">Твой AI-сотрудник выполняет задачи 24/7</p>
+            </div>
+        </div>
+
+        <!-- PRODUCT MOCKUP -->
+        <div class="mockup-frame">
+            <div class="mockup-inner">
+                <div style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:16px;padding:24px;background:linear-gradient(135deg,#0a0a1a,#050510);">
+                    <div id="ai-terminal" style="width:100%;max-width:420px;font-family:'Courier New',monospace;font-size:13px;color:#0a84ff;line-height:1.8;">
+                        <div style="color:#888;margin-bottom:8px;">● Aiden — online</div>
+                        <div class="terminal-line-el" id="tl-1"></div>
+                        <div class="terminal-line-el" id="tl-2"></div>
+                        <div class="terminal-line-el" id="tl-3"></div>
+                        <div class="terminal-line-el" id="tl-4"></div>
+                        <div class="terminal-line-el" id="tl-5"></div>
+                        <div class="terminal-line-el" id="tl-6"></div>
+                    </div>
+                </div>
+                <div class="mockup-overlay"></div>
+                <div class="mockup-label">Aiden · Works 24/7 on your tasks</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHAT AI DOES -->
+<section class="ai-does fx-bg">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="features-label">ВОЗМОЖНОСТИ</span>
+            <h2 class="section-title" id="features-title">Что твой AI-сотрудник<br>делает за тебя</h2>
+        </div>
+        <div class="ai-grid">
+            <div class="ai-card">
+                <div class="ai-card-icon">📧</div>
+                <div class="ai-card-content">
+                    <h4 class="ai-card-title" id="ai-card1-title">Отвечает на сообщения и письма</h4>
+                    <p class="ai-card-text" id="ai-card1-text">Обрабатывает входящие письма и сообщения от клиентов круглосуточно</p>
+                </div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-card-icon">📅</div>
+                <div class="ai-card-content">
+                    <h4 class="ai-card-title" id="ai-card2-title">Планирует и напоминает о задачах</h4>
+                    <p class="ai-card-text" id="ai-card2-text">Ведёт расписание, напоминает о дедлайнах и важных задачах</p>
+                </div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-card-icon">📊</div>
+                <div class="ai-card-content">
+                    <h4 class="ai-card-title" id="ai-card3-title">Анализирует данные и делает отчёты</h4>
+                    <p class="ai-card-text" id="ai-card3-text">Собирает данные, строит аналитику, готовит сводки и отчёты</p>
+                </div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-card-icon">✍️</div>
+                <div class="ai-card-content">
+                    <h4 class="ai-card-title" id="ai-card4-title">Пишет тексты, посты, описания</h4>
+                    <p class="ai-card-text" id="ai-card4-text">Контент для соцсетей, описания товаров, письма клиентам</p>
+                </div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-card-icon">🔔</div>
+                <div class="ai-card-content">
+                    <h4 class="ai-card-title" id="ai-card5-title">Мониторит и предупреждает о важном</h4>
+                    <p class="ai-card-text" id="ai-card5-text">Следит за метриками и предупреждает, когда нужна твоя реакция</p>
+                </div>
+            </div>
+            <div class="ai-card">
+                <div class="ai-card-icon">🤝</div>
+                <div class="ai-card-content">
+                    <h4 class="ai-card-title" id="ai-card6-title">Работает в Telegram и WhatsApp</h4>
+                    <p class="ai-card-text" id="ai-card6-text">Работает прямо в мессенджерах где твои клиенты</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison fx-bg">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="comparison-label">СРАВНЕНИЕ</span>
+            <h2 class="section-title" id="comparison-title">AI-сотрудник vs Обычный сотрудник</h2>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th id="cmp-col-human">Обычный сотрудник</th>
+                        <th class="col-ai" id="cmp-col-ai">AI-сотрудник (Aiden)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="cmp-row-cost">Стоимость</td>
+                        <td><span class="price-old" id="cmp-price-old">$1000+/мес</span></td>
+                        <td><span class="price-new" id="cmp-price-new">$29 один раз</span></td>
+                    </tr>
+                    <tr>
+                        <td id="cmp-row-night">Работает ночью</td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td id="cmp-row-sick">Никогда не болеет</td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td id="cmp-row-memory">Помнит всё</td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td id="cmp-row-tg">Работает в Telegram</td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td id="cmp-row-scale">Масштабируется</td>
+                        <td><span class="cross">❌</span></td>
+                        <td><span class="check">✅</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials fx-bg">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="testimonials-label">ЧТО ГОВОРЯТ ЛЮДИ</span>
+            <h2 class="section-title" id="testimonials-title">Реальные отзывы.<br>Реальные результаты.</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">«Yeah this was 1,000% worth it... autonomously running tests, resolving errors and opening PRs... The future is here.»</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">N</div>
+                    <div>
+                        <div class="author-name">@nateliason</div>
+                        <div class="author-role">Nate Liason · Предприниматель</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">«At this point I don't even know what to call @openclaw... this is the first time I have felt like I am living in the future since the launch of ChatGPT.»</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">D</div>
+                    <div>
+                        <div class="author-name">@davemorin</div>
+                        <div class="author-role">Dave Morin · Основатель Path</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <p class="testimonial-text">«It's running my company.»</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">T</div>
+                    <div>
+                        <div class="author-name">@therno</div>
+                        <div class="author-role">CEO · Стартап-основатель</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing fx-bg" id="pricing">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-label" id="pricing-label">ЦЕНА</span>
+            <h2 class="section-title" id="pricing-title">Один раз заплатил —<br>работает вечно</h2>
+        </div>
+        <div class="pricing-card">
+            <div class="pricing-tag" id="pricing-tag">🔥 Лимитированная цена</div>
+            <h3 class="pricing-title" id="pricing-card-title">Твой AI-Сотрудник</h3>
+            <div class="pricing-old" id="pricing-old-price">Обычная цена: $97</div>
+            <div class="pricing-price"><sup>$</sup>29</div>
+            <ul class="features-list" id="pricing-features">
+                <li><span class="feat-icon">✅</span> <span id="feat-1">12 глав — от установки до автоматизации</span></li>
+                <li><span class="feat-icon">✅</span> <span id="feat-2">AI работает 24/7 на твоих задачах</span></li>
+                <li><span class="feat-icon">✅</span> <span id="feat-3">Шаблоны и готовые настройки</span></li>
+                <li><span class="feat-icon">✅</span> <span id="feat-4">30 готовых команд для AI</span></li>
+                <li><span class="feat-icon">✅</span> <span id="feat-5">Гайд на 3 языках (RU / EN / ES)</span></li>
+                <li><span class="feat-icon">✅</span> <span id="feat-6">Поддержка сообщества</span></li>
+            </ul>
+            <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" class="btn-primary" id="pricing-cta" style="width:100%; display:block; text-align:center; font-size:18px; padding:20px 40px;" target="_blank">
+                Нанять своего AI-сотрудника — $29
+            </a>
+            <p class="pricing-note" id="pricing-note">🔒 Безопасная оплата · Мгновенный доступ</p>
+        </div>
+    </div>
+</section>
+
+<!-- SETUP SERVICE -->
+<section class="setup fx-bg">
+    <div class="container">
+        <div class="setup-card">
+            <div class="setup-content">
+                <h3 class="setup-title" id="setup-title">Не хочешь настраивать сам?</h3>
+                <p class="setup-text" id="setup-text">Мы установим и настроим твоего AI-сотрудника под ключ. Обычно это стоит $400, но для покупателей гайда — специальная цена $200.</p>
+                <div class="setup-features" id="setup-features">
+                    <span>⚙️ Установка</span>
+                    <span>🎯 Настройка под твой бизнес</span>
+                    <span>🛡️ 30 дней поддержки</span>
+                </div>
+            </div>
+            <div class="setup-pricing">
+                <div class="setup-old">~~$400~~</div>
+                <div class="setup-new"><sup>$</sup>200</div>
+                <a href="https://t.me/AI_handyman" class="btn-outline" id="setup-cta">Заказать настройку →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-orb footer-orb-1"></div>
+    <div class="footer-orb footer-orb-2"></div>
+    <div class="footer-orb footer-orb-3"></div>
+    <div class="footer-inner">
+        <p>
+            <span class="footer-brand">Aiden</span>
+            &nbsp;·&nbsp;
+            <span id="footer-copy">© 2025 Все права защищены</span>
+        </p>
+        <p class="powered">
+            <img src="data:image/webp;base64,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" style="height:18px;opacity:0.5;vertical-align:middle;margin-right:6px;" alt="OpenClaw">
+            Powered by <a href="https://openclaw.ai" target="_blank">OpenClaw</a>
+        </p>
+    </div>
+</footer>
+
+<script>
+// ── TYPEWRITER TERMINAL ──
+(function() {
+    const lines = [
+        { id: 'tl-1', text: '✓ Checking incoming messages...', color: '#0a84ff' },
+        { id: 'tl-2', text: '✓ Replying to client: "Hello, how can I help?"', color: '#0a84ff' },
+        { id: 'tl-3', text: '✓ Reminder: meeting at 2:00 PM', color: '#0a84ff' },
+        { id: 'tl-4', text: '✓ Analyzing weekly report...', color: '#0a84ff' },
+        { id: 'tl-5', text: '✓ Writing Instagram post...', color: '#0a84ff' },
+        { id: 'tl-6', text: '● All done. Waiting for next task.', color: '#30d158' }
+    ];
+
+    function typeLine(lineObj, charDelay, done) {
+        const el = document.getElementById(lineObj.id);
+        if (!el) { done && done(); return; }
+        el.style.color = lineObj.color;
+        const cursor = document.createElement('span');
+        cursor.className = 'type-cursor';
+        cursor.textContent = '|';
+        el.innerHTML = '';
+        el.appendChild(cursor);
+        let i = 0;
+        const txt = lineObj.text;
+        function next() {
+            if (i < txt.length) {
+                cursor.before(document.createTextNode(txt[i]));
+                i++;
+                setTimeout(next, charDelay + (Math.random() * 30 - 15));
+            } else {
+                cursor.remove();
+                done && done();
+            }
+        }
+        next();
+    }
+
+    function runTypewriter(startDelay) {
+        // clear all lines
+        lines.forEach(l => {
+            const el = document.getElementById(l.id);
+            if (el) el.innerHTML = '';
+        });
+        let delay = startDelay || 600;
+        lines.forEach((line, idx) => {
+            setTimeout(() => typeLine(line, 28, null), delay);
+            // next line starts after this one finishes (~28ms * avgLen + buffer)
+            delay += line.text.length * 30 + 400;
+        });
+        // Loop after all lines done + pause
+        const totalTime = delay + 2000;
+        setTimeout(() => runTypewriter(0), totalTime);
+    }
+
+    // Start after page load
+    window.addEventListener('load', () => setTimeout(() => runTypewriter(400), 300));
+})();
+
+// ── PARTICLE ANIMATION ──
+(function() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    function Particle() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
+        this.radius = Math.random() * 1.5 + 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.color = Math.random() > 0.5 ? '10, 132, 255' : '94, 92, 230';
+    }
+
+    Particle.prototype.update = function() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+    };
+
+    Particle.prototype.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${this.color}, ${this.opacity})`;
+        ctx.fill();
+    };
+
+    function connectParticles() {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(10, 132, 255, ${0.06 * (1 - dist/120)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    function init() {
+        resize();
+        particles = [];
+        const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 80);
+        for (let i = 0; i < count; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        connectParticles();
+        animationId = requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+        cancelAnimationFrame(animationId);
+        init();
+        animate();
+    });
+
+    init();
+    animate();
+})();
+</script>
+
+<script>
+// Ensure correct language is set after all DOM elements are loaded
+document.addEventListener('DOMContentLoaded', () => setLang('en'));
+setTimeout(() => setLang('en'), 100);
+setTimeout(() => setLang('en'), 500);
+</script>
+</body>
+</html>
