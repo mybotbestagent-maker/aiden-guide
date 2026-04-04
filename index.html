@@ -1434,16 +1434,18 @@ function setLang(lang) {
     setText('ai-card6-title', t.aiCard6Title);
     setText('ai-card6-text', t.aiCard6Text);
     // Lang buttons
-    // Urgency bar
+    // Urgency bar + popup
     const urgencyTexts = {
-        en: {watching: 'people watching now', cta: 'Get for $29 →'},
-        ru: {watching: 'человек смотрят сейчас', cta: 'Получить за $29 →'},
-        es: {watching: 'personas viendo ahora', cta: 'Obtener por $29 →'}
+        en: {watching: 'people watching now', cta: 'Get for $29 →', bought: 'bought Aiden Guide ✓'},
+        ru: {watching: 'человек смотрят сейчас', cta: 'Получить за $29 →', bought: 'купил Aiden Guide ✓'},
+        es: {watching: 'personas viendo ahora', cta: 'Obtener por $29 →', bought: 'compró Aiden Guide ✓'}
     };
     const uw = document.getElementById('urgency-watching');
     const uc = document.getElementById('urgency-cta');
     if (uw) uw.textContent = urgencyTexts[lang].watching;
     if (uc) uc.textContent = urgencyTexts[lang].cta;
+    var pa = document.getElementById('popup-action');
+    if (pa) pa.textContent = urgencyTexts[lang].bought;
     
     // Popup buyers per language
     window.currentLang = lang;
@@ -1457,13 +1459,27 @@ function setLang(lang) {
 }
 window.addEventListener('load', () => {
     var lang = navigator.language || navigator.userLanguage || 'en';
-    if (lang.startsWith('ru') || lang.startsWith('uk') || lang.startsWith('kk')) {
+    if (lang.startsWith('ru') || lang.startsWith('uk') || lang.startsWith('kk') || lang.startsWith('be')) {
         setLang('ru');
     } else if (lang.startsWith('es')) {
         setLang('es');
     } else {
         setLang('en');
     }
+    // Sync urgency bar with detected language
+    var uw = document.getElementById('urgency-watching');
+    var uc = document.getElementById('urgency-cta');
+    var pa = document.getElementById('popup-action');
+    var urgencyTexts = {
+        en: {watching: 'people watching now', cta: 'Get for $29 →', bought: 'bought Aiden Guide ✓'},
+        ru: {watching: 'человек смотрят сейчас', cta: 'Получить за $29 →', bought: 'купил Aiden Guide ✓'},
+        es: {watching: 'personas viendo ahora', cta: 'Obtener por $29 →', bought: 'compró Aiden Guide ✓'}
+    };
+    var detectedLang = lang.startsWith('ru')||lang.startsWith('uk')||lang.startsWith('kk')||lang.startsWith('be') ? 'ru' : lang.startsWith('es') ? 'es' : 'en';
+    if (uw) uw.textContent = urgencyTexts[detectedLang].watching;
+    if (uc) uc.textContent = urgencyTexts[detectedLang].cta;
+    if (pa) pa.textContent = urgencyTexts[detectedLang].bought;
+    window.currentLang = detectedLang;
 });
 </script>
 
@@ -2027,7 +2043,7 @@ window.addEventListener('load', () => {
     <div class="avatar" id="popup-avatar">&#128100;</div>
     <div>
         <div id="popup-name" style="font-weight:600;color:#fff;margin-bottom:2px;">Михаил К.</div>
-        <div style="color:#aaa;">купил Aiden Guide &#10003;</div>
+        <div style="color:#aaa;" id="popup-action">купил Aiden Guide &#10003;</div>
         <div id="popup-time" style="color:#666;font-size:11px;margin-top:2px;">2 минуты назад</div>
     </div>
 </div>
