@@ -1449,10 +1449,11 @@ function setLang(lang) {
     
     // Popup buyers per language
     window.currentLang = lang;
-    // Switch review images
+    // Switch review images - use querySelectorAll for all grids
     ['ru','en','es'].forEach(l => {
-        var revGrid = document.querySelector('.reviews-'+l);
-        if (revGrid) revGrid.style.display = l === lang ? 'grid' : 'none';
+        document.querySelectorAll('.reviews-'+l).forEach(function(el) {
+            el.style.display = l === lang ? 'grid' : 'none';
+        });
     });
     ['en','es','ru'].forEach(l => {
         const btn = document.getElementById('lang-'+l);
@@ -1463,6 +1464,10 @@ function setLang(lang) {
     });
 }
 window.addEventListener('load', () => {
+    // Hide all review grids initially
+    document.querySelectorAll('.reviews-ru,.reviews-en,.reviews-es').forEach(function(el){
+        el.style.display='none';
+    });
     var lang = navigator.language || navigator.userLanguage || 'en';
     if (lang.startsWith('ru') || lang.startsWith('uk') || lang.startsWith('kk') || lang.startsWith('be')) {
         setLang('ru');
