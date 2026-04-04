@@ -7,22 +7,20 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, sans-serif; background: #0a0a14; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-  .card { background: #13131f; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 40px 32px; max-width: 540px; width: 100%; text-align: center; }
+  .card { background: #13131f; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px 40px; max-width: 540px; width: 100%; text-align: center; }
   .emoji { font-size: 56px; margin-bottom: 16px; }
-  h1 { font-size: 26px; font-weight: 700; margin-bottom: 10px; }
-  .subtitle { color: #8888aa; font-size: 15px; line-height: 1.6; margin-bottom: 32px; }
+  h1 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+  .subtitle { color: #8888aa; font-size: 16px; line-height: 1.6; margin-bottom: 40px; }
   .subtitle strong { color: #a78bfa; }
-  .lang-title { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #555577; margin-bottom: 16px; }
-  .download-btn { display: flex; align-items: center; justify-content: space-between; background: #1e1e30; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 16px 20px; margin-bottom: 10px; color: #fff; text-decoration: none; transition: all 0.2s; }
-  .download-btn:hover, .download-btn:active { background: #2a2a42; border-color: #a78bfa; }
-  .btn-left { display: flex; align-items: center; gap: 12px; }
-  .flag { font-size: 26px; }
-  .lang-name { font-size: 17px; font-weight: 600; text-align: left; }
-  .lang-sub { font-size: 12px; color: #666688; margin-top: 2px; text-align: left; }
-  .dl-badge { background: #a78bfa; color: #fff; border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; white-space: nowrap; }
-  .ios-hint { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px 16px; margin-top: 20px; font-size: 13px; color: #8888aa; line-height: 1.6; }
-  .ios-hint strong { color: #fff; }
-  .footer { margin-top: 24px; font-size: 13px; color: #444466; }
+  .lang-title { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #555577; margin-bottom: 20px; }
+  .download-btn { display: flex; align-items: center; justify-content: space-between; background: #1e1e30; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px 24px; margin-bottom: 12px; color: #fff; transition: all 0.2s; text-decoration: none; }
+  .download-btn:hover { background: #2a2a42; border-color: #a78bfa; transform: translateY(-1px); }
+  .btn-left { display: flex; align-items: center; gap: 14px; }
+  .flag { font-size: 28px; }
+  .lang-name { font-size: 18px; font-weight: 600; text-align: left; }
+  .lang-sub { font-size: 13px; color: #666688; margin-top: 2px; text-align: left; }
+  .dl-badge { background: #a78bfa; color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .footer { margin-top: 32px; font-size: 13px; color: #444466; }
   .footer a { color: #a78bfa; text-decoration: none; }
 </style>
 </head>
@@ -30,29 +28,23 @@
 <div class="card">
   <div class="emoji">🎉</div>
   <h1>Payment Successful!</h1>
-  <p class="subtitle">Thank you! Choose your language to get <strong>Aiden Guide</strong>.</p>
+  <p class="subtitle">Thank you! Choose your language to download <strong>Aiden Guide</strong>.</p>
   <div class="lang-title">Choose Language / Выберите язык / Elige idioma</div>
 
   <a href="https://23-94-149-88.sslip.io/download/en" class="download-btn">
-    <div class="btn-left"><div class="flag">🇺🇸</div><div><div class="lang-name">English</div><div class="lang-sub">Aiden Guide — English</div></div></div>
-    <div class="dl-badge">⬇ Open</div>
+    <div class="btn-left"><div class="flag">🇺🇸</div><div><div class="lang-name">English</div><div class="lang-sub">Aiden Guide — English Version</div></div></div>
+    <div class="dl-badge">⬇ Download</div>
   </a>
 
   <a href="https://23-94-149-88.sslip.io/download/ru" class="download-btn">
-    <div class="btn-left"><div class="flag">🇷🇺</div><div><div class="lang-name">Русский</div><div class="lang-sub">Гайд Aiden — Русский</div></div></div>
-    <div class="dl-badge">⬇ Открыть</div>
+    <div class="btn-left"><div class="flag">🇷🇺</div><div><div class="lang-name">Русский</div><div class="lang-sub">Гайд Aiden — Русская версия</div></div></div>
+    <div class="dl-badge">⬇ Скачать</div>
   </a>
 
   <a href="https://23-94-149-88.sslip.io/download/es" class="download-btn">
-    <div class="btn-left"><div class="flag">🇪🇸</div><div><div class="lang-name">Español</div><div class="lang-sub">Guía Aiden — Español</div></div></div>
-    <div class="dl-badge">⬇ Abrir</div>
+    <div class="btn-left"><div class="flag">🇪🇸</div><div><div class="lang-name">Español</div><div class="lang-sub">Guía Aiden — Versión en Español</div></div></div>
+    <div class="dl-badge">⬇ Descargar</div>
   </a>
-
-  <div class="ios-hint">
-    📱 <strong>iPhone / iPad:</strong> После открытия нажми
-    <strong>кнопку "Поделиться" (□↑)</strong> внизу экрана →
-    <strong>"Сохранить в Файлы"</strong> — и PDF будет у тебя!
-  </div>
 
   <div class="footer">Questions? <a href="https://t.me/handy_dad">@handy_dad</a></div>
 </div>
