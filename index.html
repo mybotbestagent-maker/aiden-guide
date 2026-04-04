@@ -1434,6 +1434,19 @@ function setLang(lang) {
     setText('ai-card6-title', t.aiCard6Title);
     setText('ai-card6-text', t.aiCard6Text);
     // Lang buttons
+    // Urgency bar
+    const urgencyTexts = {
+        en: {watching: 'people watching now', cta: 'Get for $29 →'},
+        ru: {watching: 'человек смотрят сейчас', cta: 'Получить за $29 →'},
+        es: {watching: 'personas viendo ahora', cta: 'Obtener por $29 →'}
+    };
+    const uw = document.getElementById('urgency-watching');
+    const uc = document.getElementById('urgency-cta');
+    if (uw) uw.textContent = urgencyTexts[lang].watching;
+    if (uc) uc.textContent = urgencyTexts[lang].cta;
+    
+    // Popup buyers per language
+    window.currentLang = lang;
     ['en','es','ru'].forEach(l => {
         const btn = document.getElementById('lang-'+l);
         if (btn) {
@@ -1442,7 +1455,16 @@ function setLang(lang) {
         }
     });
 }
-window.addEventListener('load', () => setLang('en'));
+window.addEventListener('load', () => {
+    var lang = navigator.language || navigator.userLanguage || 'en';
+    if (lang.startsWith('ru') || lang.startsWith('uk') || lang.startsWith('kk')) {
+        setLang('ru');
+    } else if (lang.startsWith('es')) {
+        setLang('es');
+    } else {
+        setLang('en');
+    }
+});
 </script>
 
 <!-- HERO -->
@@ -1965,9 +1987,7 @@ window.addEventListener('load', () => setLang('en'));
 
 <script>
 // Ensure correct language is set after all DOM elements are loaded
-document.addEventListener('DOMContentLoaded', () => setLang('en'));
-setTimeout(() => setLang('en'), 100);
-setTimeout(() => setLang('en'), 500);
+// Language auto-detection handled above
 </script>
 
 <!-- Live Social Proof Widget -->
@@ -2000,7 +2020,7 @@ setTimeout(() => setLang('en'), 500);
 
 <div class="urgency-bar">
     <span class="pulse"></span>
-    <span>&#128293; <span id="live-count">47</span> человек смотрят сейчас &nbsp;&#8212;&nbsp; <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q">Получить за $29 &#8594;</a></span>
+    <span id="urgency-text">&#128293; <span id="live-count">47</span> <span id="urgency-watching">человек смотрят сейчас</span> &nbsp;&#8212;&nbsp; <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" id="urgency-cta">Получить за $29 &#8594;</a></span>
 </div>
 
 <div class="popup-proof" id="popup-proof" style="display:none;opacity:0;">
@@ -2013,11 +2033,16 @@ setTimeout(() => setLang('en'), 500);
 </div>
 
 <script>
-var buyers=[{n:"Михаил К.",a:"&#129492;",t:"2 мин назад"},{n:"Анна С.",a:"&#128105;",t:"5 мин назад"},{n:"Дмитрий Р.",a:"&#128084;",t:"9 мин назад"},{n:"Олег Т.",a:"&#129489;",t:"14 мин назад"},{n:"Марина В.",a:"&#128105;&#8205;&#128187;",t:"17 мин назад"},{n:"Алексей М.",a:"&#128104;",t:"21 мин назад"}];
+var buyersDB={
+    ru:[{n:"Михаил К.",a:"&#129492;",t:"2 мин назад"},{n:"Анна С.",a:"&#128105;",t:"5 мин назад"},{n:"Дмитрий Р.",a:"&#128084;",t:"9 мин назад"},{n:"Олег Т.",a:"&#129489;",t:"14 мин назад"}],
+    en:[{n:"Michael K.",a:"&#129492;",t:"2 min ago"},{n:"Anna S.",a:"&#128105;",t:"5 min ago"},{n:"David R.",a:"&#128084;",t:"9 min ago"},{n:"Oliver T.",a:"&#129489;",t:"14 min ago"}],
+    es:[{n:"Miguel K.",a:"&#129492;",t:"hace 2 min"},{n:"Ana S.",a:"&#128105;",t:"hace 5 min"},{n:"David R.",a:"&#128084;",t:"hace 9 min"},{n:"Carlos T.",a:"&#129489;",t:"hace 14 min"}]
+};
+var buyers=buyersDB.ru;
 var bi=0,cnt=47+Math.floor(Math.random()*10);
 document.getElementById("live-count").textContent=cnt;
 setInterval(function(){cnt+=Math.random()>.5?1:-1;cnt=Math.max(35,Math.min(65,cnt));document.getElementById("live-count").textContent=cnt;},6000);
-function showPopup(){var b=buyers[bi%buyers.length];bi++;var p=document.getElementById("popup-proof");document.getElementById("popup-avatar").innerHTML=b.a;document.getElementById("popup-name").textContent=b.n;document.getElementById("popup-time").textContent=b.t;p.style.display="flex";setTimeout(function(){p.style.opacity="1";},50);setTimeout(function(){p.style.opacity="0";setTimeout(function(){p.style.display="none";},300);},4500);}
+function showPopup(){var lang=window.currentLang||'en';var buyers=buyersDB[lang]||buyersDB.en;var b=buyers[bi%buyers.length];bi++;var p=document.getElementById("popup-proof");document.getElementById("popup-avatar").innerHTML=b.a;document.getElementById("popup-name").textContent=b.n;document.getElementById("popup-time").textContent=b.t;p.style.display="flex";setTimeout(function(){p.style.opacity="1";},50);setTimeout(function(){p.style.opacity="0";setTimeout(function(){p.style.display="none";},300);},4500);}
 setTimeout(showPopup,8000);setInterval(showPopup,28000);
 </script>
 </body>
