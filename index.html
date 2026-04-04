@@ -1449,6 +1449,11 @@ function setLang(lang) {
     
     // Popup buyers per language
     window.currentLang = lang;
+    // Switch review images
+    ['ru','en','es'].forEach(l => {
+        var revGrid = document.querySelector('.reviews-'+l);
+        if (revGrid) revGrid.style.display = l === lang ? 'grid' : 'none';
+    });
     ['en','es','ru'].forEach(l => {
         const btn = document.getElementById('lang-'+l);
         if (btn) {
@@ -1755,13 +1760,32 @@ window.addEventListener('load', () => {
             <span class="section-label" id="testimonials-label">ЧТО ГОВОРЯТ ЛЮДИ</span>
             <h2 class="section-title" id="testimonials-title">Реальные отзывы.<br>Реальные результаты.</h2>
         </div>
-        <div class="testimonials-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
-            <img src="review1.jpg" alt="Отзыв Михаил Тарасов" style="width:100%;border-radius:16px;display:block;" loading="lazy">
-            <img src="review2.jpg" alt="Отзыв Анна Шевченко" style="width:100%;border-radius:16px;display:block;" loading="lazy">
-            <img src="review3.jpg" alt="Отзыв Дмитрий Ким" style="width:100%;border-radius:16px;display:block;" loading="lazy">
-            <img src="review4.jpg" alt="Отзыв Олег Романов" style="width:100%;border-radius:16px;display:block;" loading="lazy">
-            <img src="review5.jpg" alt="Отзыв Марина Волкова" style="width:100%;border-radius:16px;display:block;" loading="lazy">
-            <img src="review6.jpg" alt="Отзыв Алексей Морозов" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+        <!-- RU reviews -->
+        <div class="testimonials-grid reviews-ru" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;display:none;">
+            <img src="ru1.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="ru2.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="ru3.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="ru4.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="ru5.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="ru6.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+        </div>
+        <!-- EN reviews -->
+        <div class="testimonials-grid reviews-en" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;display:none;">
+            <img src="en1.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="en2.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="en3.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="en4.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="en5.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="en6.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+        </div>
+        <!-- ES reviews -->
+        <div class="testimonials-grid reviews-es" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;display:none;">
+            <img src="es1.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="es2.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="es3.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="es4.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="es5.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
+            <img src="es6.jpg" style="width:100%;border-radius:16px;display:block;" loading="lazy">
         </div>
     </div>
 </section>
