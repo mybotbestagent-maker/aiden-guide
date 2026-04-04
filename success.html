@@ -6,98 +6,58 @@
 <title>Download Aiden Guide</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #0a0a14; color: #fff;
-    min-height: 100vh; display: flex;
-    align-items: center; justify-content: center; padding: 20px;
-  }
-  .card {
-    background: #13131f; border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px; padding: 48px 40px;
-    max-width: 540px; width: 100%; text-align: center;
-  }
+  body { font-family: -apple-system, sans-serif; background: #0a0a14; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .card { background: #13131f; border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px 40px; max-width: 540px; width: 100%; text-align: center; }
   .emoji { font-size: 56px; margin-bottom: 16px; }
   h1 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
   .subtitle { color: #8888aa; font-size: 16px; line-height: 1.6; margin-bottom: 40px; }
   .subtitle strong { color: #a78bfa; }
   .lang-title { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #555577; margin-bottom: 20px; }
-  .download-btn {
-    display: flex; align-items: center; justify-content: space-between;
-    background: #1e1e30; border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px; padding: 18px 24px; margin-bottom: 12px;
-    color: #fff; transition: all 0.2s; cursor: pointer; width: 100%;
-    text-decoration: none;
-  }
+  .download-btn { display: flex; align-items: center; justify-content: space-between; background: #1e1e30; border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px 24px; margin-bottom: 12px; color: #fff; transition: all 0.2s; cursor: pointer; width: 100%; }
   .download-btn:hover { background: #2a2a42; border-color: #a78bfa; transform: translateY(-1px); }
   .btn-left { display: flex; align-items: center; gap: 14px; }
   .flag { font-size: 28px; }
   .lang-name { font-size: 18px; font-weight: 600; text-align: left; }
   .lang-sub { font-size: 13px; color: #666688; margin-top: 2px; text-align: left; }
-  .dl-badge { background: #a78bfa; color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .dl-badge { background: #a78bfa; color: #fff; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600; }
   .footer { margin-top: 32px; font-size: 13px; color: #444466; }
   .footer a { color: #a78bfa; text-decoration: none; }
-  .status { margin-top: 8px; font-size: 12px; color: #a78bfa; display: none; }
 </style>
 </head>
 <body>
 <div class="card">
   <div class="emoji">🎉</div>
   <h1>Payment Successful!</h1>
-  <p class="subtitle">Thank you! Click your language to download <strong>Aiden Guide</strong>.</p>
+  <p class="subtitle">Thank you! Choose your language to download <strong>Aiden Guide</strong>.</p>
   <div class="lang-title">Choose Language / Выберите язык / Elige idioma</div>
 
-  <a id="btn-en" href="#" onclick="dl('aiden-guide-en.pdf','Aiden-Guide-EN.pdf','status-en'); return false;" class="download-btn">
-    <div class="btn-left">
-      <div class="flag">🇺🇸</div>
-      <div><div class="lang-name">English</div><div class="lang-sub">Aiden Guide — English Version</div><div id="status-en" class="status">⏳ Downloading...</div></div>
-    </div>
+  <button onclick="dl('aiden-guide-en.bin','Aiden-Guide-EN.pdf')" class="download-btn">
+    <div class="btn-left"><div class="flag">🇺🇸</div><div><div class="lang-name">English</div><div class="lang-sub">Aiden Guide — English Version</div></div></div>
     <div class="dl-badge">⬇ Download</div>
-  </a>
+  </button>
 
-  <a id="btn-ru" href="#" onclick="dl('aiden-guide-ru.pdf','Aiden-Guide-RU.pdf','status-ru'); return false;" class="download-btn">
-    <div class="btn-left">
-      <div class="flag">🇷🇺</div>
-      <div><div class="lang-name">Русский</div><div class="lang-sub">Гайд Aiden — Русская версия</div><div id="status-ru" class="status">⏳ Скачивается...</div></div>
-    </div>
+  <button onclick="dl('aiden-guide-ru.bin','Aiden-Guide-RU.pdf')" class="download-btn">
+    <div class="btn-left"><div class="flag">🇷🇺</div><div><div class="lang-name">Русский</div><div class="lang-sub">Гайд Aiden — Русская версия</div></div></div>
     <div class="dl-badge">⬇ Скачать</div>
-  </a>
+  </button>
 
-  <a id="btn-es" href="#" onclick="dl('aiden-guide-es.pdf','Aiden-Guide-ES.pdf','status-es'); return false;" class="download-btn">
-    <div class="btn-left">
-      <div class="flag">🇪🇸</div>
-      <div><div class="lang-name">Español</div><div class="lang-sub">Guía Aiden — Versión en Español</div><div id="status-es" class="status">⏳ Descargando...</div></div>
-    </div>
+  <button onclick="dl('aiden-guide-es.bin','Aiden-Guide-ES.pdf')" class="download-btn">
+    <div class="btn-left"><div class="flag">🇪🇸</div><div><div class="lang-name">Español</div><div class="lang-sub">Guía Aiden — Versión en Español</div></div></div>
     <div class="dl-badge">⬇ Descargar</div>
-  </a>
+  </button>
 
-  <div class="footer">Questions? Contact us at <a href="https://t.me/handy_dad">@handy_dad</a></div>
+  <div class="footer">Questions? <a href="https://t.me/handy_dad">@handy_dad</a></div>
 </div>
-
 <script>
-async function dl(file, name, statusId) {
-  const status = document.getElementById(statusId);
-  status.style.display = 'block';
-  try {
-    const resp = await fetch(file);
-    const blob = await resp.blob();
-    const pdfBlob = new Blob([blob], {type: 'application/octet-stream'});
-    const url = URL.createObjectURL(pdfBlob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = name;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 1000);
-    status.textContent = '✅ Done!';
-  } catch(e) {
-    // fallback
-    const a = document.createElement('a');
-    a.href = file;
-    a.download = name;
-    a.click();
-    status.textContent = '✅ Done!';
-  }
+async function dl(src, name) {
+  const r = await fetch(src);
+  const buf = await r.arrayBuffer();
+  const blob = new Blob([buf], {type:'application/pdf'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 2000);
 }
 </script>
 </body>
