@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2166647804098712');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2166647804098712&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aiden — Твой AI-Сотрудник | Работает 24/7</title>
@@ -1033,7 +1050,7 @@
             <button onclick="setLang('ru')" id="lang-ru" style="padding:4px 10px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;background:transparent;color:#888;transition:all 0.2s;">RU</button>
         </div>
         <a href="blog/" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:14px;font-weight:500;margin-right:4px;transition:color 0.2s;" onmouseover="this.style.color='#0a84ff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Blog</a>
-        <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" class="nav-cta" id="nav-cta-btn">Get for $29</a>
+        <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" onclick="fbq('track', 'InitiateCheckout', {value: 29, currency: 'USD'})" class="nav-cta" id="nav-cta-btn">Get for $29</a>
     </div>
 </nav>
 <script>
@@ -1502,7 +1519,7 @@ window.addEventListener('load', () => {
             Пока ты спишь, едешь или отдыхаешь — твой AI отвечает клиентам, выполняет задачи и генерирует результаты. Настрой один раз. Работает вечно.
         </p>
         <div class="hero-buttons">
-            <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" class="btn-primary" id="hero-btn1">Получить гайд — $29</a>
+            <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" onclick="fbq('track', 'InitiateCheckout', {value: 29, currency: 'USD'})" class="btn-primary" id="hero-btn1">Получить гайд — $29</a>
             <a href="#how" class="btn-secondary" id="hero-btn2">Посмотреть как это работает</a>
         </div>
         <p class="social-proof">⚡ Уже <span class="highlight">500+ предпринимателей</span> наняли своего AI-сотрудника</p>
@@ -1815,7 +1832,7 @@ window.addEventListener('load', () => {
                 <li><span class="feat-icon">✅</span> <span id="feat-5">Гайд на 3 языках (RU / EN / ES)</span></li>
                 <li><span class="feat-icon">✅</span> <span id="feat-6">Поддержка сообщества</span></li>
             </ul>
-            <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" class="btn-primary" id="pricing-cta" style="width:100%; display:block; text-align:center; font-size:18px; padding:20px 40px;" target="_blank">
+            <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" onclick="fbq('track', 'InitiateCheckout', {value: 29, currency: 'USD'})" class="btn-primary" id="pricing-cta" style="width:100%; display:block; text-align:center; font-size:18px; padding:20px 40px;" target="_blank">
                 Нанять своего AI-сотрудника — $29
             </a>
             <p class="pricing-note" id="pricing-note">🔒 Безопасная оплата · Мгновенный доступ</p>
@@ -2038,7 +2055,7 @@ window.addEventListener('load', () => {
 
 <div class="urgency-bar">
     <span class="pulse"></span>
-    <span id="urgency-text">&#128293; <span id="live-count">47</span> <span id="urgency-watching">человек смотрят сейчас</span> &nbsp;&#8212;&nbsp; <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" id="urgency-cta">Получить за $29 &#8594;</a></span>
+    <span id="urgency-text">&#128293; <span id="live-count">47</span> <span id="urgency-watching">человек смотрят сейчас</span> &nbsp;&#8212;&nbsp; <a href="https://buy.stripe.com/eVqbJ17rCabjejz8PR9sk0q" onclick="fbq('track', 'InitiateCheckout', {value: 29, currency: 'USD'})" id="urgency-cta">Получить за $29 &#8594;</a></span>
 </div>
 
 <div class="popup-proof" id="popup-proof" style="display:none;opacity:0;">
